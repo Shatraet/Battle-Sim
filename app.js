@@ -9,15 +9,15 @@ const playerOneHealthCount = document.querySelector(".health-count-p1");
 const gameStateText = document.querySelector(".game-state");
 const attackContainer = document.querySelector(".attack-container");
 const restartBtn = document.querySelector(".restart-game");
-let playerOneHealth = 180;
-let playerTwoHealth = 180;
-const playerTwoAttacks = ["Psychic", "Confusion", "Facade", "Psycho Blast"];
+let playerOneHealth = 70;
+let playerTwoHealth = 70;
+const playerTwoAttacks = ["Taxes", "Bad Boss", "Crying in the bathroom", "Bad News"];
 
 // Changes health color for player one and player two
 const healthColor = (playerHealth, playerBar) => {
-  if (playerHealth < 140 && playerHealth > 65) {
+  if (playerHealth < 20 && playerHealth > 40) {
     playerBar.style.backgroundColor = "#cee809";
-  } else if (playerHealth < 160) {
+  } else if (playerHealth < 40) {
     playerBar.style.backgroundColor = "red";
   } else {
     playerBar.style.backgroundColor = "green";
@@ -30,7 +30,7 @@ const checkWinner = (name, playerBar, playerCount) => {
   playerBar.style.width = "0%";
   gameStateText.style.display = "block";
   attackContainer.style.display = "none";
-  playerCount.innerText = "0 / 180";
+  playerCount.innerText = "0 / 70";
   restartBtn.style.display = "block";
 };
 
@@ -44,12 +44,12 @@ const playerOneAttack = (subtract, missCount, attackName) => {
     if (playerTwoHealth <= 0) {
       checkWinner("Jesus", playerTwoHealthBar, playerTwoHealthCount);
     } else if (playerOneHealth <= 0) {
-      checkWinner("Mewtwo", playerOneHealthBar, playerOneHealthCount);
+      checkWinner("Larry", playerOneHealthBar, playerOneHealthCount);
     } else {
       intervalFunction();
       playerTwoHealthBar.style.width = `${playerTwoHealth}%`;
       playerTwoHealthBar.style.transition = "1.4s";
-      playerTwoHealthCount.innerText = `${playerTwoHealth} / 180`;
+      playerTwoHealthCount.innerText = `${playerTwoHealth} / 70`;
       gameStateText.innerText = `Jesus used ${attackName}! It took away ${subtract} HP!`;
       attackContainer.style.display = "none";
     }
@@ -65,13 +65,13 @@ const playerTwoAttack = () => {
   let subtractHealth;
   const randomAttackNum = Math.floor(Math.random() * 4) + 0;
   const randomAttack = playerTwoAttacks[randomAttackNum];
-  if (randomAttack === "Psychic") {
+  if (randomAttack === "Taxes") {
     missCount = 10;
     subtractHealth = 15;
-  } else if (randomAttack === "Confusion") {
+  } else if (randomAttack === "Bad Boss") {
     missCount = 7;
     subtractHealth = 17;
-  } else if (randomAttack === "Facade") {
+  } else if (randomAttack === "Crying in the bathroom") {
     missCount = 4;
     subtractHealth = 20;
   } else {
@@ -82,16 +82,16 @@ const playerTwoAttack = () => {
   if (randomNumber !== 1) {
     playerOneHealth -= subtractHealth;
     if (playerOneHealth <= 0) {
-      checkWinner("Mewtwo", playerOneHealthBar, playerOneHealthCount);
+      checkWinner("Larry", playerOneHealthBar, playerOneHealthCount);
     } else {
       playerOneHealthBar.style.width = `${playerOneHealth}%`;
       playerOneHealthBar.style.transition = "1.4s";
-      playerOneHealthCount.innerText = `${playerOneHealth} / 180`;
-      gameStateText.innerText = `Mewtwo used ${randomAttack}! It took away ${subtractHealth} HP!`;
+      playerOneHealthCount.innerText = `${playerOneHealth} / 70`;
+      gameStateText.innerText = `Larry used ${randomAttack}! It took away ${subtractHealth} HP!`;
       attackContainer.style.display = "none";
     }
   } else {
-    gameStateText.innerText = `Mewtwo used ${randomAttack}... But it missed!`;
+    gameStateText.innerText = `Larry used ${randomAttack}... But it missed!`;
   }
 };
 
@@ -123,14 +123,14 @@ const restartGame = () => {
   playerTwoHealthBar.style.width = "180%";
   gameStateText.style.display = "none";
   attackContainer.style.display = "grid";
-  playerTwoHealthCount.innerText = "180 / 180";
+  playerTwoHealthCount.innerText = "70 / 70";
   playerOneHealthBar.style.width = "180%";
   playerOneHealthBar.style.backgroundColor = "green";
   playerTwoHealthBar.style.backgroundColor = "green";
-  playerOneHealthCount.innerText = "180 / 180";
+  playerOneHealthCount.innerText = "70 / 70";
   restartBtn.style.display = "none";
-  playerOneHealth = 180;
-  playerTwoHealth = 180;
+  playerOneHealth = 70;
+  playerTwoHealth = 70;
 };
 
 // Restart button event listener
